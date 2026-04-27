@@ -121,3 +121,36 @@ Normalization of probabilities and inclusion of multiple features (counts, senti
     "avg_sentiment_24h": 0.01
   }
 }
+
+### Data Summary
+
+| Collection | Description | Approx Size |
+|------------|------------|-------------|
+| odds_snapshots | Raw odds collected over time | 35,000+ |
+| news_articles | Player-specific news articles | 700+ |
+| player_snapshots | Final merged dataset | 35,000+ |
+
+
+### Data Dictionary
+
+| Feature | Type | Description | Example |
+|--------|------|------------|--------|
+| player_name | string | Player name | Scottie Scheffler |
+| snapshot_time_utc | datetime | Time of snapshot | 2026-04-09T00:00:00Z |
+| normalized_implied_prob | float | Market probability | 0.084 |
+| odds_change_normalized_implied_prob | float | Change from previous snapshot | 0.002 |
+| article_count_24h | int | Number of recent articles | 4 |
+| avg_sentiment_24h | float | Average sentiment score | 0.01 |
+| distinct_sources_24h | int | Number of unique sources | 3 |
+| latest_article_age_hours | float | Age of most recent article | 2.5 |
+
+### Uncertainty Quantification
+
+| Feature | Missing % | Notes |
+|--------|----------|------|
+| avg_sentiment_24h | Low | Based on simple NLP |
+| article_count_24h | Medium | Depends on API coverage |
+| normalized_implied_prob | Low | Derived from odds |
+| odds_change_normalized_implied_prob | Medium | First observation missing |
+| latest_article_age_hours | Medium | Depends on timing of news |
+
