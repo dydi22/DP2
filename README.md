@@ -1,20 +1,20 @@
-# DS 4320 Project 2: Forecasting Masters Betting Market Movement with Odds and News Data
+# DS 4320 Project 2: Do News Signals Explain Betting Market Movement in the Masters?
 
 ## Executive Summary
 
-This repository contains a document-model data project that studies how betting market expectations changed during the 2026 Masters Tournament. The project builds a secondary dataset by combining historical sportsbook odds from The Odds API with player-specific news articles from NewsAPI. The final MongoDB database stores odds snapshots, news articles, and merged player-level snapshot documents. The analysis pipeline queries MongoDB into a pandas DataFrame, engineers news and odds-change features, and visualizes how implied win probabilities moved over time.
+This project investigates whether player-specific news signals can explain short-term movement in betting market implied probabilities during the 2026 Masters Tournament. A document-model dataset was created using MongoDB by combining sportsbook odds data from The Odds API with player-level news articles from NewsAPI. Each document represents a player snapshot containing odds, odds changes, and recent news features. The analysis pipeline loads this data into a pandas DataFrame and evaluates whether news-based features can predict whether a player’s implied probability increases in the next snapshot. Results show that news signals alone perform at near-random accuracy, while market-based features provide stronger predictive power, suggesting that betting markets efficiently incorporate public information.
 
 ## Name
 
-Dylan Dietrich
+Dylan Dietrich  
 
-## NetID
+## NetID  
 
-atv7xh
+atv7xh  
 
-## DOI
+## DOI  
 
-[Add DOI here]
+[INSERT DOI HERE]
 
 ## Project Materials
 
@@ -29,23 +29,23 @@ atv7xh
 
 ### General Problem
 
-Forecasting stock prices / forecasting market movement.
+Forecasting market movement.
 
 ### Refined Specific Problem
 
-This project refines the general problem of forecasting market movement into the specific problem of forecasting changes in Masters Tournament betting odds. Instead of predicting a stock price, the project analyzes whether player-specific news signals are associated with changes in sportsbook-implied win probabilities.
+This project refines the general problem of forecasting market movement into predicting short-term changes in betting market implied probabilities for players in the Masters Tournament. Specifically, it tests whether recent news signals (such as article count and sentiment) help predict whether a player's normalized implied probability increases in the next odds snapshot.
 
 ### Motivation
 
-Betting markets are useful because they continuously update based on public expectations, news, injuries, performance trends, and bettor behavior. In golf, tournament winner odds can change quickly as new information becomes available. Understanding these movements can help analysts study how information enters the market and how public signals, such as news coverage, relate to changes in implied probabilities.
+Betting markets behave similarly to financial markets, continuously updating as new information becomes available. Understanding whether public information such as news coverage influences these movements provides insight into market efficiency and information flow. This problem is particularly interesting in sports analytics, where both performance and perception can impact betting odds.
 
 ### Rationale for Refinement
 
-I refined the broad problem of forecasting stock prices into sports betting market movement because both settings involve time-series market prices, changing probabilities, and information-driven updates. The Masters Tournament is a useful case study because it has a clear outcome, many competitors, and active betting markets. This also fits naturally into a document model because each player snapshot can store nested odds data, odds-change fields, and news features together in one document.
+The broad problem of forecasting stock prices was refined to sports betting markets because they provide structured, high-frequency probability updates and a clear outcome. The Masters Tournament was selected due to its well-defined timeframe and active betting markets. This problem also fits naturally into a document model, as each player snapshot contains nested data such as odds, news features, and changes over time.
 
 ### Press Release
 
-[Can News Signals Explain Masters Betting Market Movement?](press_release.md)
+[Do News Signals Drive Betting Market Movement?](press_release.md)
 
 ---
 
@@ -54,85 +54,70 @@ I refined the broad problem of forecasting stock prices into sports betting mark
 ### Terminology
 
 | Term | Meaning | Why it matters |
-|---|---|---|
-| American Odds | Betting odds format used in U.S. sportsbooks | Raw market price from bookmakers |
-| Implied Probability | Probability converted from betting odds | Makes odds comparable across players |
-| Normalized Implied Probability | Implied probability adjusted so probabilities sum across the market | Better reflects relative market expectations |
-| Odds Snapshot | A record of player odds at one point in time | Main time-series unit |
-| News Sentiment | Simple score based on positive/negative words in player news | Used as an explanatory feature |
-| Lookback Window | Time period before each odds snapshot used to collect news | Connects recent news to market movement |
-| Odds Change | Difference in odds or implied probability from the previous snapshot | Target movement being analyzed |
+|------|--------|--------------|
+| American Odds | Betting odds format | Raw market price |
+| Implied Probability | Probability derived from odds | Comparable metric |
+| Normalized Probability | Adjusted probability across players | Market-relative measure |
+| Odds Snapshot | Market state at a timestamp | Time-series unit |
+| News Sentiment | Score from article text | Potential signal |
+| Odds Change | Change in probability over time | Target variable |
 
 ### Domain Description
 
-This project lives in the sports analytics and betting market domain. Betting odds act like market prices because they reflect the current expectations of bookmakers and bettors. When new information appears, such as player injuries, strong performance, or tournament news, betting prices may shift. By combining odds data with player-specific news data, this project studies whether public information can help explain movement in implied win probabilities.
+This project operates in the sports betting and analytics domain. Betting odds reflect collective expectations about outcomes and adjust rapidly as new information becomes available. By combining structured betting data with unstructured news data, this project evaluates whether public information can explain short-term market behavior.
 
 ### Background Readings
 
 | Title | Description | Link |
-|---|---|---|
-| The Odds API Documentation | Explains how sportsbook odds are collected and returned | `background_readings/odds_api_documentation.pdf` |
-| NewsAPI Documentation | Explains how news articles are queried by topic and time range | `background_readings/newsapi_documentation.pdf` |
-| MongoDB Document Model | Explains why nested document structures are useful | `background_readings/mongodb_document_model_article.pdf` |
-| Sports Betting Market Efficiency | Background on how betting markets react to information | `background_readings/sports_betting_market_efficiency.pdf` |
-| Golf Prediction / Betting Article | Domain context for golf tournament forecasting | `background_readings/golf_prediction_article.pdf` |
+|------|------------|------|
+| Odds API Docs | Odds data collection | background_readings/... |
+| NewsAPI Docs | News data collection | background_readings/... |
+| MongoDB Docs | Document model structure | background_readings/... |
+| Market Efficiency | How markets process info | background_readings/... |
+| Sports Analytics | Context for prediction | background_readings/... |
 
 ---
 
 ## Data Creation
 
-### Raw Data Acquisition
+### Data Acquisition
 
-The dataset was created by collecting historical Masters Tournament outright winner odds from The Odds API and player-specific news articles from NewsAPI. Odds were requested every 15 minutes from April 9, 2026 through April 12, 2026. Each odds response was transformed into player-level documents containing sportsbook prices, average American odds, raw implied probability, and normalized implied probability. News articles were collected for each player using queries that combined the player name with Masters, Augusta, or golf-related terms.
+Odds data was collected from The Odds API at regular intervals during the Masters Tournament. News data was collected from NewsAPI using player-specific queries. These datasets were merged into player-level snapshot documents, each representing a player’s state at a given time.
 
 ### Code Table
 
 | File | Description | Link |
-|---|---|---|
-| `project2.ipynb` | Main data creation and analysis notebook | `project2.ipynb` |
-| `src/collect_odds.py` | Fetches historical odds data from The Odds API | `src/collect_odds.py` |
-| `src/collect_news.py` | Fetches player-specific articles from NewsAPI | `src/collect_news.py` |
-| `src/build_player_snapshots.py` | Merges odds and news into final documents | `src/build_player_snapshots.py` |
-| `src/mongo_helpers.py` | MongoDB connection, indexes, and helper functions | `src/mongo_helpers.py` |
+|------|------------|------|
+| project2.ipynb | Main pipeline | project2.ipynb |
+| collect_odds.py | Odds collection | src/... |
+| collect_news.py | News collection | src/... |
 
-### Rationale for Critical Decisions
+### Rationale for Decisions
 
-The document model was chosen because each player snapshot naturally contains nested information: tournament metadata, odds data, odds-change data, and news features. This makes each document self-contained and easy to query for analysis. The 24-hour news lookback window was chosen to connect recent news coverage to each odds snapshot without using information from the future. Normalized implied probability was used instead of raw odds because it gives a clearer measure of each player’s relative market expectation.
+A document model was chosen because it allows each player snapshot to store nested information, including odds, odds changes, and news features. This structure simplifies querying and aligns with time-series analysis.
 
 ### Bias Identification
 
-Bias may enter the dataset through sportsbook coverage, NewsAPI coverage, and player popularity. More famous players are likely to have more news articles, which could make their news features appear more important than those of lesser-known players. Sportsbook odds also include bookmaker margin and may reflect betting behavior rather than true win probability.
+Bias may arise from unequal news coverage across players, sportsbook pricing strategies, and missing data.
 
 ### Bias Mitigation
 
-To reduce bias, the project normalizes implied probabilities across players and tracks article counts separately from sentiment. This makes it possible to distinguish between the amount of coverage and the tone of coverage. The analysis also reports missing or zero-news cases so that players with limited media coverage are not treated the same as players with active news signals.
+Normalization of probabilities and inclusion of multiple features (counts, sentiment, sources) helps reduce bias and provides a more balanced representation of information.
 
 ---
 
 ## Metadata
 
-### Implicit Schema Guidelines
-
-The final MongoDB document model uses a player-level snapshot structure. Each document represents one player at one timestamp.
+### Schema
 
 ```json
 {
-  "snapshot_time_utc": "2026-04-09T00:00:00Z",
-  "tournament": "Masters Tournament Winner",
-  "player_name": "Scottie Scheffler",
-  "odds": {
-    "average_american_price": 620,
-    "raw_implied_prob": 0.1389,
-    "normalized_implied_prob": 0.0842
-  },
-  "odds_change": {
-    "average_american_price": -20,
-    "raw_implied_prob": 0.003,
-    "normalized_implied_prob": 0.001
-  },
-  "news_features": {
-    "article_count_24h": 4,
-    "avg_sentiment_24h": 0.015,
-    "distinct_sources_24h": 3
+  "player_name": "Rory McIlroy",
+  "snapshot_time_utc": "...",
+  "feature_vector": {
+    "normalized_implied_prob": 0.07,
+    "odds_change_normalized_implied_prob": 0.002,
+    "article_count_24h": 3,
+    "avg_sentiment_24h": 0.01
   }
 }
