@@ -121,6 +121,7 @@ Normalization of probabilities and inclusion of multiple features (counts, senti
     "avg_sentiment_24h": 0.01
   }
 }
+```
 
 ### Data Summary
 
