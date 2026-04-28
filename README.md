@@ -119,12 +119,13 @@ Odds data was collected from The Odds API at regular intervals during the Master
 
 | File | Description | Link |
 |------|-------------|------|
-| project2.ipynb | Main analysis pipeline | project2.ipynb |
-| collect_odds.py | Odds collection script | code/collect_odds.py |
-| collect_news.py | News collection script | code/collect_news.py |
-| build_player_snapshots.py | Builds final merged documents | code/build_player_snapshots.py |
-| mongo_helpers.py | MongoDB connection and upload helpers | code/mongo_helpers.py |
-
+| Data Collection Notebook | Original notebook used to collect odds/news data and upload MongoDB collections | [Open](project2_data_collection.ipynb) |
+| Analysis Notebook | Structured notebook used to load MongoDB data, build models, and visualize results | [Open](project2.ipynb) |
+| Pipeline Markdown | Markdown export of the structured analysis notebook | [Open](project2.md) |
+| collect_odds.py | Odds collection script | [Open](code/collect_odds.py) |
+| collect_news.py | News collection script | [Open](code/collect_news.py) |
+| build_player_snapshots.py | Builds final merged documents | [Open](code/build_player_snapshots.py) |
+| mongo_helpers.py | MongoDB connection and upload helpers | [Open](code/mongo_helpers.py) |
 ### Rationale for Decisions
 
 A document model was chosen because it allows each player snapshot to store nested information, including odds, odds changes, and news features. This structure simplifies querying and aligns with time-series analysis.
