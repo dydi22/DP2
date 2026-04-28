@@ -151,8 +151,9 @@ There may also be timing bias. A news article may be published after the market 
 Several steps were used to reduce or account for these biases. First, the project uses normalized implied probability instead of raw odds, which helps make market probabilities more comparable across players and snapshots. Second, news activity is separated into multiple features, including article count, sentiment, distinct sources, and article recency. This prevents the analysis from treating all news coverage as the same.
 
 The analysis also compares a news-only model against a combined market-and-news model. This helps avoid overstating the role of news by testing whether news features alone contain meaningful predictive signal. The results show that news-only features perform close to random, which suggests that simple news metrics are not strong enough to explain market movement by themselves.
-
 Finally, the project explicitly treats the news data as an imperfect public signal rather than a complete record of all information available to betting markets. The findings are interpreted cautiously: the model tests association, not guaranteed causation.
+
+
 ---
 
 ## Metadata
