@@ -1,0 +1,22 @@
+2026-04-28 22:46:43,457 - INFO - DS 4320 Project 2 pipeline started
+2026-04-28 22:46:43,458 - INFO - Connected to MongoDB Atlas
+2026-04-28 22:46:43,458 - INFO - Verified masters_project database
+2026-04-28 22:46:43,458 - INFO - Verified odds_snapshots collection
+2026-04-28 22:46:43,458 - INFO - Verified news_articles collection
+2026-04-28 22:46:43,459 - INFO - Verified player_snapshots collection
+2026-04-28 22:46:43,459 - INFO - Loaded player_snapshots into pandas DataFrame
+2026-04-28 22:46:43,459 - INFO - Created target variable: target_prob_up_next
+2026-04-28 22:46:43,459 - INFO - Trained news-only logistic regression model
+2026-04-28 22:46:43,461 - INFO - Trained market + news logistic regression model
+2026-04-28 22:46:43,461 - INFO - Created implied probability visualization
+2026-04-28 22:46:43,461 - INFO - Pipeline completed successfully
+2026-04-28 22:48:25,640 - INFO - DS 4320 Project 2 pipeline started
+2026-04-28 22:48:25,699 - INFO - MongoDB collection verified: news_articles contains 739 documents
+2026-04-28 22:48:25,747 - INFO - MongoDB collection verified: player_snapshots contains 26157 documents
+2026-04-28 22:48:25,788 - INFO - MongoDB collection verified: odds_snapshots contains 26157 documents
+2026-04-28 22:48:25,789 - INFO - Loaded player_snapshots into dataframe with shape (26157, 34)
+2026-04-28 22:48:25,803 - INFO - Target distribution for target_prob_up_next: {0: 17083, 1: 9074}
+2026-04-28 22:48:25,805 - INFO - News-only model result: accuracy approximately 0.49
+2026-04-28 22:48:25,806 - INFO - Market + news model result: accuracy approximately 0.57
+2026-04-28 22:48:25,806 - INFO - Main visualization created: Masters implied win probability over time
+2026-04-28 22:48:25,806 - INFO - DS 4320 Project 2 pipeline completed successfully
