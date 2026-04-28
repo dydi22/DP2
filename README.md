@@ -86,7 +86,7 @@ The broad problem of forecasting stock prices was refined to sports betting mark
 ### Terminology
 
 | Term | Meaning | Why it matters |
-|------|--------|--------------|
+|------|---------|----------------|
 | American Odds | Betting odds format | Raw market price |
 | Implied Probability | Probability derived from odds | Comparable metric |
 | Normalized Probability | Adjusted probability across players | Market-relative measure |
@@ -101,12 +101,12 @@ This project operates in the sports betting and analytics domain. Betting odds r
 ### Background Readings
 
 | Title | Description | Link |
-|------|------------|------|
-| Odds API Docs | Odds data collection | background_readings/... |
-| NewsAPI Docs | News data collection | background_readings/... |
-| MongoDB Docs | Document model structure | background_readings/... |
-| Market Efficiency | How markets process info | background_readings/... |
-| Sports Analytics | Context for prediction | background_readings/... |
+|------|-------------|------|
+| Odds API Docs | Odds data collection | background_readings/odds_api_docs.pdf |
+| NewsAPI Docs | News data collection | background_readings/newsapi_docs.pdf |
+| MongoDB Docs | Document model structure | background_readings/mongodb_document_model.pdf |
+| Market Efficiency | How markets process information | background_readings/market_efficiency.pdf |
+| Sports Analytics | Context for prediction | background_readings/sports_analytics_paper.pdf |
 
 ---
 
@@ -119,10 +119,12 @@ Odds data was collected from The Odds API at regular intervals during the Master
 ### Code Table
 
 | File | Description | Link |
-|------|------------|------|
-| project2.ipynb | Main pipeline | project2.ipynb |
-| collect_odds.py | Odds collection | src/... |
-| collect_news.py | News collection | src/... |
+|------|-------------|------|
+| project2.ipynb | Main analysis pipeline | project2.ipynb |
+| collect_odds.py | Odds collection script | code/collect_odds.py |
+| collect_news.py | News collection script | code/collect_news.py |
+| build_player_snapshots.py | Builds final merged documents | code/build_player_snapshots.py |
+| mongo_helpers.py | MongoDB connection and upload helpers | code/mongo_helpers.py |
 
 ### Rationale for Decisions
 
