@@ -4,17 +4,14 @@
 
 This project investigates whether player-specific news signals can explain short-term movement in betting market implied probabilities during the 2026 Masters Tournament. A document-model dataset was created using MongoDB by combining sportsbook odds data from The Odds API with player-level news articles from NewsAPI. Each document represents a player snapshot containing odds, odds changes, and recent news features. The analysis pipeline loads this data into a pandas DataFrame and evaluates whether news-based features can predict whether a player’s implied probability increases in the next snapshot. Results show that news signals alone perform at near-random accuracy, while market-based features provide stronger predictive power, suggesting that betting markets efficiently incorporate public information.
 
-## Name
 
-Dylan Dietrich  
 
-## NetID  
-
-atv7xh  
-
-## DOI  
-
-[INSERT DOI HERE]
+**Name:** Dylan Dietrich  
+**NetID:** atv7xh  
+**DOI:** [![DOI](https://zenodo.org/badge/1195709669.svg)](https://doi.org/10.5281/zenodo.19362807)  
+**Press Release:** [press_release.md](./press_release.md)  
+**Pipeline:** [project2.ipynb](./project2.ipynb)  
+**License:** [MIT License](./LICENSE)
 
 
 ---
