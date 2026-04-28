@@ -25,6 +25,38 @@ atv7xh
 
 ---
 
+## Repository Structure
+
+```text
+DS4320-Project2/
+├── README.md                         # Project overview and submission details
+├── press_release.md                  # Press release (non-technical summary)
+├── project2.ipynb                    # Main analysis pipeline (Jupyter notebook)
+├── project2.md                       # Markdown export of notebook
+├── LICENSE                           # License file
+
+├── background_readings/              # Background reading PDFs
+│   ├── odds_api_docs.pdf
+│   ├── newsapi_docs.pdf
+│   ├── mongodb_document_model.pdf
+│   ├── market_efficiency.pdf
+│   └── sports_analytics_paper.pdf
+
+├── code/                             # Python scripts for data collection + MongoDB
+│   ├── collect_odds.py               # Fetch sportsbook odds from API
+│   ├── collect_news.py               # Fetch player news data
+│   ├── build_player_snapshots.py     # Merge odds + news into final dataset
+│   └── mongo_helpers.py              # MongoDB connection + upload helpers
+
+├── images/                           # Figures used in project
+│   ├── implied_prob_over_time.png
+│   └── model_results.png
+
+└── logs/                             # Log files from pipeline execution
+    └── project2_pipeline.log
+```
+
+
 ## Problem Definition
 
 ### General Problem
