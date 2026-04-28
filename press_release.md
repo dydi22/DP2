@@ -28,6 +28,14 @@ This chart shows how implied win probabilities for top players evolved over time
 
 ---
 
+## Model Performance
+
+![Model Performance Comparison](images/model_results.png)
+
+The chart compares the performance of the news-only model and the combined model. The news-only model performs close to random, while the combined model shows modest improvement, highlighting the importance of market-based features.
+
+---
+
 ## Key Findings
 
 - The **news-only model achieved approximately 49% accuracy**, which is close to random guessing  
