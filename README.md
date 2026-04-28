@@ -100,6 +100,11 @@ This project operates in the sports betting and analytics domain. Betting odds r
 
 ### Background Readings
 
+The project is grounded in concepts from document databases and sports analytics. In particular, MongoDB’s document model allows data to be stored as flexible JSON-like documents rather than rigid tables, enabling easier integration of heterogeneous data such as odds and news features.
+
+Additional background readings, including API documentation and supporting materials, are available here:  
+[Background Readings Folder](https://myuva-my.sharepoint.com/:f:/g/personal/atv7xh_virginia_edu/IgA9YYliVdAuQolmQCzFfmG2AQ1rk_q6XUvspxfxyhNS6GE?e=fqkpwE)
+
 | Title | Description | Link |
 |------|-------------|------|
 | Odds API Docs | Odds data collection | background_readings/odds_api_docs.pdf |
