@@ -101,11 +101,11 @@ Additional background readings, including API documentation and supporting mater
 
 | Title | Description | Link |
 |------|-------------|------|
-| Odds API Docs | Odds data collection | background_readings/odds_api_docs.pdf |
-| NewsAPI Docs | News data collection | background_readings/newsapi_docs.pdf |
-| MongoDB Docs | Document model structure | background_readings/mongodb_document_model.pdf |
-| Market Efficiency | How markets process information | background_readings/market_efficiency.pdf |
-| Sports Analytics | Context for prediction | background_readings/sports_analytics_paper.pdf |
+| Odds API Docs | Odds data collection | [Open](background_readings/odds_api_docs.pdf) |
+| NewsAPI Docs | News data collection | [Open](background_readings/newsapi_docs.pdf) |
+| MongoDB Docs | Document model structure | [Open](background_readings/mongodb_document_model.pdf) |
+| Market Efficiency | How markets process information | [Open](background_readings/market_efficiency.pdf) |
+| Sports Analytics | Context for prediction | [Open](background_readings/sports_analytics_paper.pdf) |
 
 ---
 
