@@ -173,35 +173,47 @@ Finally, the project explicitly treats the news data as an imperfect public sign
 }
 ```
 
+
 ### Data Summary
 
 | Collection | Description | Approx Size |
-|------------|------------|-------------|
-| odds_snapshots | Raw odds collected over time | 35,000+ |
-| news_articles | Player-specific news articles | 700+ |
-| player_snapshots | Final merged dataset | 35,000+ |
+|------------|-------------|-------------|
+| `odds_snapshots` | Raw player-level odds snapshots collected over time | 35,000+ |
+| `news_articles` | Player-specific news articles collected from NewsAPI | 700+ |
+| `player_snapshots` | Final merged player-level document dataset used for analysis | 35,000+ |
 
+---
 
 ### Data Dictionary
 
 | Feature | Type | Description | Example |
-|--------|------|------------|--------|
-| player_name | string | Player name | Scottie Scheffler |
-| snapshot_time_utc | datetime | Time of snapshot | 2026-04-09T00:00:00Z |
-| normalized_implied_prob | float | Market probability | 0.084 |
-| odds_change_normalized_implied_prob | float | Change from previous snapshot | 0.002 |
-| article_count_24h | int | Number of recent articles | 4 |
-| avg_sentiment_24h | float | Average sentiment score | 0.01 |
-| distinct_sources_24h | int | Number of unique sources | 3 |
-| latest_article_age_hours | float | Age of most recent article | 2.5 |
+|---------|------|-------------|---------|
+| `player_name` | string | Golfer name | Scottie Scheffler |
+| `snapshot_time_utc` | datetime | Time of odds snapshot | 2026-04-09T00:00:00Z |
+| `feature_vector.average_american_price` | float | Average American odds across available sportsbooks | 650 |
+| `feature_vector.raw_implied_prob` | float | Implied probability converted from American odds | 0.133 |
+| `feature_vector.normalized_implied_prob` | float | Market-normalized implied probability | 0.084 |
+| `feature_vector.sportsbook_quote_count` | int | Number of sportsbook quotes available | 8 |
+| `feature_vector.odds_change_avg_american_price` | float | Change in average American odds from previous snapshot | -20 |
+| `feature_vector.odds_change_raw_implied_prob` | float | Change in raw implied probability from previous snapshot | 0.003 |
+| `feature_vector.odds_change_normalized_implied_prob` | float | Change in normalized implied probability from previous snapshot | 0.002 |
+| `feature_vector.article_count_24h` | int | Number of player-related articles in the past 24 hours | 4 |
+| `feature_vector.avg_sentiment_24h` | float | Average simple sentiment score of recent articles | 0.01 |
+| `feature_vector.distinct_sources_24h` | int | Number of unique news sources in the past 24 hours | 3 |
+| `feature_vector.latest_article_age_hours` | float | Age in hours of the most recent article | 2.5 |
+| `target_prob_up_next` | int | Whether normalized implied probability increased in the next snapshot | 1 |
+
+---
 
 ### Uncertainty Quantification
 
-| Feature | Missing % | Notes |
-|--------|----------|------|
-| avg_sentiment_24h | Low | Based on simple NLP |
-| article_count_24h | Medium | Depends on API coverage |
-| normalized_implied_prob | Low | Derived from odds |
-| odds_change_normalized_implied_prob | Medium | First observation missing |
-| latest_article_age_hours | Medium | Depends on timing of news |
+| Feature | Source of Uncertainty | Mitigation |
+|---------|----------------------|------------|
+| `feature_vector.average_american_price` | Sportsbooks may quote different prices | Average across available sportsbooks |
+| `feature_vector.normalized_implied_prob` | Depends on market coverage at each snapshot | Normalize within each snapshot |
+| `feature_vector.odds_change_normalized_implied_prob` | First snapshot has no previous value | Drop or mark missing values during modeling |
+| `feature_vector.article_count_24h` | NewsAPI may not capture every relevant article | Treat as a limited public-news signal |
+| `feature_vector.avg_sentiment_24h` | Simple sentiment may miss context or sarcasm | Interpret as a rough feature, not a perfect measure |
+| `feature_vector.distinct_sources_24h` | Popular players receive more coverage | Analyze source count separately from sentiment |
+| `feature_vector.latest_article_age_hours` | Timing may not match when market reacts | Use as a recency feature and acknowledge limitation |
 
