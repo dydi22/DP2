@@ -94,18 +94,18 @@ This project operates in the sports betting and analytics domain. Betting odds r
 
 ### Background Readings
 
-The project is grounded in concepts from document databases and sports analytics. In particular, MongoDB’s document model allows data to be stored as flexible JSON-like documents rather than rigid tables, enabling easier integration of heterogeneous data such as odds and news features.
+The project is grounded in concepts from sports analytics and betting market behavior. These readings provide context on how implied probabilities, market efficiency, and news signals may influence betting markets.
 
-Additional background readings, including API documentation and supporting materials, are available here:  
+Additional background readings and supporting materials are available here:  
 [Background Readings Folder](https://myuva-my.sharepoint.com/:f:/g/personal/atv7xh_virginia_edu/IgA9YYliVdAuQolmQCzFfmG2AQ1rk_q6XUvspxfxyhNS6GE?e=fqkpwE)
 
 | Title | Description | Link |
 |------|-------------|------|
-| Odds API Docs | Odds data collection | [Open](background_readings/odds_api_docs.pdf) |
-| NewsAPI Docs | News data collection | [Open](background_readings/newsapi_docs.pdf) |
-| MongoDB Docs | Document model structure | [Open](background_readings/mongodb_document_model.pdf) |
-| Market Efficiency | How markets process information | [Open](background_readings/market_efficiency.pdf) |
-| Sports Analytics | Context for prediction | [Open](background_readings/sports_analytics_paper.pdf) |
+| Golf Betting Strategy | Overview of betting approaches and market behavior in golf | [Open](background_readings/golf_betting_strategy.pdf) |
+| Market Efficiency | Explains how markets incorporate information into prices | [Open](background_readings/market_efficiency.pdf) |
+| News Impact on Odds | Examines how news and media coverage influence betting markets | [Open](background_readings/news_impact_odds.pdf) |
+| Implied Probability | Explains how odds are converted into probabilities | [Open](background_readings/odds_implied_probability.pdf) |
+| Sports Analytics Introduction | General introduction to data-driven sports analysis | [Open](background_readings/sports_analytics_intro.pdf) |
 
 ---
 
