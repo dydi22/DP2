@@ -155,21 +155,61 @@ Finally, the project explicitly treats the news data as an imperfect public sign
 
 ## Metadata
 
-### Schema
+### Implicit Schema Guidelines
+
+The main collection used in this project is `player_snapshots`. Each document represents one golfer at one odds snapshot during the Masters Tournament. The document stores identifying information, tournament metadata, semantic nested fields for odds and news, and a `feature_vector` used directly for modeling.
 
 ```json
 {
-  "player_name": "Rory McIlroy",
-  "snapshot_time_utc": "...",
+  "_id": "MongoDB ObjectId",
+  "snapshot_time_utc": "2026-04-09T00:00:00Z",
+  "requested_snapshot_time_utc": "2026-04-09T00:00:00Z",
+  "player_name": "Scottie Scheffler",
+  "commence_time": "2026-04-09T12:00:00Z",
+  "event_id": "masters_2026",
+  "event_name": "Masters Tournament Winner",
+  "tournament": "Masters Tournament",
+
+  "created_from": {
+    "odds_collection": "odds_snapshots",
+    "news_collection": "news_articles"
+  },
+
+  "odds": {
+    "average_american_price": 650,
+    "raw_implied_prob": 0.133,
+    "normalized_implied_prob": 0.084,
+    "sportsbook_quote_count": 8
+  },
+
+  "odds_change": {
+    "average_american_price": -20,
+    "raw_implied_prob": 0.003,
+    "normalized_implied_prob": 0.002
+  },
+
+  "news_features": {
+    "article_count_24h": 4,
+    "avg_sentiment_24h": 0.01,
+    "distinct_sources_24h": 3,
+    "latest_article_age_hours": 2.5
+  },
+
   "feature_vector": {
-    "normalized_implied_prob": 0.07,
+    "average_american_price": 650,
+    "raw_implied_prob": 0.133,
+    "normalized_implied_prob": 0.084,
+    "sportsbook_quote_count": 8,
+    "odds_change_avg_american_price": -20,
+    "odds_change_raw_implied_prob": 0.003,
     "odds_change_normalized_implied_prob": 0.002,
-    "article_count_24h": 3,
-    "avg_sentiment_24h": 0.01
+    "article_count_24h": 4,
+    "avg_sentiment_24h": 0.01,
+    "distinct_sources_24h": 3,
+    "latest_article_age_hours": 2.5
   }
 }
 ```
-
 
 ### Data Summary
 
