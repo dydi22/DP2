@@ -25,7 +25,8 @@ atv7xh
 DS4320-Project2/
 ├── README.md                         
 ├── press_release.md                  
-├── project2.ipynb                    
+├── project2.ipynb
+├── project2_data_collection.ipynb                  
 ├── project2.md                   
 ├── LICENSE                   
 
