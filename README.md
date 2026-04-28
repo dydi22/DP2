@@ -16,12 +16,6 @@ atv7xh
 
 [INSERT DOI HERE]
 
-## Project Materials
-
-- [Press Release](press_release.md)
-- [Pipeline Notebook](project2.ipynb)
-- [Pipeline Markdown](project2.md)
-- [License](LICENSE)
 
 ---
 
@@ -29,30 +23,30 @@ atv7xh
 
 ```text
 DS4320-Project2/
-├── README.md                         # Project overview and submission details
-├── press_release.md                  # Press release (non-technical summary)
-├── project2.ipynb                    # Main analysis pipeline (Jupyter notebook)
-├── project2.md                       # Markdown export of notebook
-├── LICENSE                           # License file
+├── README.md                         
+├── press_release.md                  
+├── project2.ipynb                    
+├── project2.md                   
+├── LICENSE                   
 
-├── background_readings/              # Background reading PDFs
+├── background_readings/              
 │   ├── odds_api_docs.pdf
 │   ├── newsapi_docs.pdf
 │   ├── mongodb_document_model.pdf
 │   ├── market_efficiency.pdf
 │   └── sports_analytics_paper.pdf
 
-├── code/                             # Python scripts for data collection + MongoDB
-│   ├── collect_odds.py               # Fetch sportsbook odds from API
-│   ├── collect_news.py               # Fetch player news data
-│   ├── build_player_snapshots.py     # Merge odds + news into final dataset
-│   └── mongo_helpers.py              # MongoDB connection + upload helpers
+├── code/                             
+│   ├── collect_odds.py               
+│   ├── collect_news.py               
+│   ├── build_player_snapshots.py     
+│   └── mongo_helpers.py              
 
-├── images/                           # Figures used in project
+├── images/                          
 │   ├── implied_prob_over_time.png
 │   └── model_results.png
 
-└── logs/                             # Log files from pipeline execution
+└── logs/                             
     └── project2_pipeline.log
 ```
 
