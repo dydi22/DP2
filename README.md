@@ -114,7 +114,9 @@ Additional background readings and supporting materials are available here:
 
 ### Data Acquisition
 
-Odds data was collected from The Odds API at regular intervals during the Masters Tournament. News data was collected from NewsAPI using player-specific queries. These datasets were merged into player-level snapshot documents, each representing a player’s state at a given time.
+The dataset was created by combining two secondary data sources: sportsbook betting odds and player-specific news coverage. Odds data was collected from The Odds API for the Masters Tournament outright winner market. Each odds snapshot captured the available sportsbook prices for individual golfers at a specific point in time. News data was collected from NewsAPI using player-specific search queries related to the Masters, Augusta, and golf.
+
+The raw odds data and raw news data were then transformed into a player-level document dataset. Each final document represents one golfer at one market snapshot and includes betting market features, odds-change features, and recent news features. This created the final MongoDB collection `player_snapshots`, which serves as the main dataset for modeling and visualization.
 
 ### Code Table
 
@@ -127,18 +129,30 @@ Odds data was collected from The Odds API at regular intervals during the Master
 | collect_news.py | News collection script | [Open](code/collect_news.py) |
 | build_player_snapshots.py | Builds final merged documents | [Open](code/build_player_snapshots.py) |
 | mongo_helpers.py | MongoDB connection and upload helpers | [Open](code/mongo_helpers.py) |
-### Rationale for Decisions
 
-A document model was chosen because it allows each player snapshot to store nested information, including odds, odds changes, and news features. This structure simplifies querying and aligns with time-series analysis.
+### Rationale for Critical Decisions
+
+A document model was chosen because the project combines heterogeneous data sources that do not fit neatly into one flat table. Each player snapshot contains nested information about the player, tournament, odds, odds changes, and news features. MongoDB is a good fit because each document can store all relevant information for one player at one point in time without requiring many relational joins.
+
+Another important decision was to use normalized implied probability rather than raw betting odds as the main market feature. Raw American odds are difficult to compare directly across players, while implied probability converts odds into a probability-like measure. Normalizing those probabilities within each market snapshot makes the values more comparable across players and over time.
+
+The project also uses recent news features, such as article count, average sentiment, source diversity, and article recency. These features were included because the main research question asks whether public news signals can explain short-term movement in betting markets. The final target variable, `target_prob_up_next`, was created to indicate whether a player’s normalized implied probability increased in the next snapshot.
 
 ### Bias Identification
 
-Bias may arise from unequal news coverage across players, sportsbook pricing strategies, and missing data.
+Several forms of bias may be introduced during the data collection process. First, media coverage is not evenly distributed across players. More famous golfers are more likely to receive articles, which can make their news features appear more active or meaningful than those of less-covered players. This introduces popularity bias.
+
+Second, NewsAPI may not capture every relevant article, especially if articles are behind paywalls, published on smaller sites, or not indexed by the API. This creates coverage bias in the news dataset. Third, sportsbook odds may reflect bettor behavior and bookmaker risk management rather than true win probability. Betting odds are not pure estimates of athletic performance because they also include bookmaker margins and market demand.
+
+There may also be timing bias. A news article may be published after the market has already reacted, or the market may move before the article appears publicly. This makes it difficult to prove that news caused odds movement, even if the two are correlated.
 
 ### Bias Mitigation
 
-Normalization of probabilities and inclusion of multiple features (counts, sentiment, sources) helps reduce bias and provides a more balanced representation of information.
+Several steps were used to reduce or account for these biases. First, the project uses normalized implied probability instead of raw odds, which helps make market probabilities more comparable across players and snapshots. Second, news activity is separated into multiple features, including article count, sentiment, distinct sources, and article recency. This prevents the analysis from treating all news coverage as the same.
 
+The analysis also compares a news-only model against a combined market-and-news model. This helps avoid overstating the role of news by testing whether news features alone contain meaningful predictive signal. The results show that news-only features perform close to random, which suggests that simple news metrics are not strong enough to explain market movement by themselves.
+
+Finally, the project explicitly treats the news data as an imperfect public signal rather than a complete record of all information available to betting markets. The findings are interpreted cautiously: the model tests association, not guaranteed causation.
 ---
 
 ## Metadata
