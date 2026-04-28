@@ -8,7 +8,7 @@ This project investigates whether player-specific news signals can explain short
 
 **Name:** Dylan Dietrich  
 **NetID:** atv7xh  
-**DOI:** [![DOI](https://zenodo.org/badge/1195709669.svg)](https://doi.org/10.5281/zenodo.19362807)  
+**DOI:** [![DOI](https://zenodo.org/badge/1222057024.svg)](https://doi.org/10.5281/zenodo.19869110)    
 **Press Release:** [press_release.md](./press_release.md)  
 **Pipeline:** [project2.ipynb](./project2.ipynb)  
 **License:** [MIT License](./LICENSE)
